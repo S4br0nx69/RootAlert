@@ -1,6 +1,11 @@
 # RootAlert
 
-RootAlert est un mini-agent léger qui surveille en temps réel les logs d’authentification Linux (/var/log/secure sur Rocky/RHEL ou /var/log/auth.log sur Debian/Ubuntu) et envoie une alerte Telegram instantanée dès qu’un événement critique est détecté :
+![Python](https://img.shields.io/badge/Python-3.12-blue)
+![Linux](https://img.shields.io/badge/OS-Linux-orange)
+![License](https://img.shields.io/badge/License-MIT-purple)
+![Security](https://img.shields.io/badge/Security-Enabled-blue)
+
+RootAlert est un mini-agent léger qui surveille en temps réel les logs d’authentification Linux (/var/log/secure sur Rocky/RHEL ou /var/log/auth.log sur Debian/Ubuntu) et envoie une alerte Telegram instantanée dès qu’un événement est détecté :
 
 - 🔓 Connexion SSH réussie
 - 🚫 Tentative SSH échouée (bruteforce)
@@ -96,3 +101,16 @@ Pour suivre les logs :
  ```bash
 sudo journalctl -u rootalert -f
 ```
+
+### 🧪 Événements détectés
+| Type d’événement | Détection | Exemple                                   |
+| ---------------- | --------- | ----------------------------------------- |
+| SSH réussi       | Oui       | `Accepted password for user from A.B.C.D` |
+| SSH failed       | Oui       | `Failed password for user from A.B.C.D`   |
+| sudo → root      | Oui       | `sudo: user : USER=root ; COMMAND=...`    |
+| sudo failed      | Oui       | `incorrect password attempts`             |
+
+
+
+### 📊 Architecture 
+![alt text](<Diagramme sans nom.drawio (1).png>)
