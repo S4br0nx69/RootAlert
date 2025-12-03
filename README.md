@@ -112,7 +112,7 @@ sudo journalctl -u rootalert -f
 
 
 
-### 📊 Architecture
+### 📊 Fonctionnement de l'agent
  
 ```mermaid
 flowchart LR
