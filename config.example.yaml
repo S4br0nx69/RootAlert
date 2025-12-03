@@ -1,0 +1,12 @@
+telegram:
+  bot_token: "TOKEN_TELEGRAM"
+  chat_id: "CHAT_ID"
+
+log:
+  path: "/var/log/secure"
+
+trusted:
+  users:
+    - "users" # <- remplacer par l'utilisateur systeme
+  ips:
+    - "127.0.0.1"
