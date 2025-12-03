@@ -112,5 +112,26 @@ sudo journalctl -u rootalert -f
 
 
 
-### 📊 Architecture 
-![alt text](<Diagramme sans nom.drawio (1).png>)
+### 📊 Architecture
+ 
+```mermaid
+flowchart LR
+
+    subgraph Server["🖥️ Serveur Linux (Rocky / Debian)"]
+        Logs["📄 /var/log/secure<br/>📄 /var/log/auth.log"]
+        Agent["🟢 RootAlert.py<br/>Analyse en temps réel"]
+    end
+
+    UserSSH["🔐 Connexion SSH<br/>(Admin ou Attaquant)"] --> Logs
+    SudoCmd["🧱 Commandes sudo<br/>(root escalation)"] --> Logs
+
+    Logs --> Agent
+
+    Agent -->|Analyse| Event{"⚠️ Événement<br/>critique ?"}
+
+    Event -->|FAILED| Telegram["📲 Alerte Telegram<br/>immédiate"]
+    Event -->|Non whitelist| Telegram
+    Event -->|Trusted| Ignore["✔️ Ignoré<br/>(user/IP de confiance)"]
+
+    Telegram --> Phone["📱 Smartphone Admin"]
+```
